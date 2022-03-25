@@ -7,7 +7,7 @@ export const Main = styled.main`
   margin: 0 auto;
 
   h2 {
-    font-size: 22px;
+    font-size: 25px;
     font-weight: 500;
     color: var(--default-text-color);
     padding: 35px;
