@@ -1,0 +1,17 @@
+:root {
+  --bg-color: #ffffff;
+  --bg-color-alt: #c3cfd9;
+  --contrast-color: #e8833a;
+
+  --default-text-color: #293845;
+  --success-text-color: #247a6b;
+
+  --free-seat-bg: #c3cfd9;
+  --free-seat-border: #808f9d;
+
+  --selected-seat-bg: #8dd7cf;
+  --selected-seat-border: #45bdb0;
+
+  --unavailable-seat-bg: #fbe192;
+  --unavailable-seat-border: #f7c52b;
+}
