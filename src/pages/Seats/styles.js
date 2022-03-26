@@ -36,7 +36,7 @@ export const Seat = styled.button`
   border-radius: 50%;
   font-size: 14px;
   font-weight: 500;
-  background-color: ${(props) => (props.isAvailable ? '#e3e3e3' : '#ff664f')};
+  background-color: ${(props) => props.background};
   color: #000000;
   cursor: pointer;
 `;

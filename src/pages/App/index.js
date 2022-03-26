@@ -5,15 +5,16 @@ import Home from '../Home';
 import Details from '../Details';
 import Showtimes from '../Showtimes';
 import Seats from '../Seats';
+import Success from '../Success';
 
 import { Header } from './styles';
 
 export default function App() {
   const [selected, setSelected] = useState([]);
-  const [buyerInfos, setBuyerInfos] = useState('');
+  const [infos, setInfos] = useState('');
 
-  function getBuyerInfos(name, cpf) {
-    setBuyerInfos({ name, cpf });
+  function getInfos(infos) {
+    setInfos(infos);
   }
 
   return (
@@ -34,11 +35,11 @@ export default function App() {
             <Seats
               selected={selected}
               setSelected={setSelected}
-              getBuyerInfos={getBuyerInfos}
+              getInfos={getInfos}
             />
           }
         />
-        <Route path="/success" element={<Success buyerInfos={buyerInfos} />} />
+        <Route path="/success" element={<Success infos={infos} />} />
       </Routes>
     </BrowserRouter>
   );

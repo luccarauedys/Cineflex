@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -23,19 +23,40 @@ export default function Seats({ selected, getBuyerInfos }) {
 
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
-
   const [name, setName] = useState('');
   const [cpf, setCPF] = useState('');
 
-  function handleInfosInput() {
-    getBuyerInfos(name, cpf);
-    console.log(name, cpf);
-    // navegar para a pagina de sucesso
-  }
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(URL).then((response) => setSeats(response.data.seats));
   }, [URL]);
+
+  function selectSeat(id) {
+    if (selectedSeats.includes(id)) {
+      setSelectedSeats(selectedSeats.filter((seatID) => seatID !== id));
+    } else {
+      setSelectedSeats([...selectedSeats, id]);
+    }
+  }
+
+  function sendInfos() {
+    const infos = {
+      ids: [...selectedSeats],
+      name: name.toString(),
+      cpf: cpf.toString(),
+    };
+
+    getInfos(infos);
+
+    axios
+      .post(
+        'https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many',
+        infos
+      )
+      .then(() => navigate('./success'))
+      .catch(() => alert('Desculpe, ocorreu um erro. Tente novamente!'));
+  }
 
   return seats.length === 0 ? (
     <Loading />
@@ -47,14 +68,23 @@ export default function Seats({ selected, getBuyerInfos }) {
         {seats.map((seat) => {
           return seat.isAvailable ? (
             <Seat
-              onClick={() => console.log('selecionei')}
+              onClick={() => {
+                selectSeat(seat.id);
+                console.log(selectedSeats);
+              }}
+              background={
+                selectedSeats.includes(seat.id) ? '#f7cd51' : '#e3e3e3'
+              }
               key={seat.id}
-              isAvailable={seat.isAvailable}
             >
               {seat.name}
             </Seat>
           ) : (
-            <Seat key={seat.id} isAvailable={seat.isAvailable}>
+            <Seat
+              onClick={() => alert('Esse assento não está disponível')}
+              key={seat.id}
+              background={'#ff664f'}
+            >
               {seat.name}
             </Seat>
           );
@@ -97,7 +127,7 @@ export default function Seats({ selected, getBuyerInfos }) {
         </label>
       </InputGroup>
 
-      <Button onClick={handleInfosInput}>Reservar assento(s)</Button>
+      <Button onClick={sendInfos}>Reservar assento(s)</Button>
 
       <Footer>
         <img src={movie.posterURL} alt={movie.title} />

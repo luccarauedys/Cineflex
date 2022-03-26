@@ -36,8 +36,8 @@ export const Main = styled.main`
 
   button {
     width: 200px;
-    padding: 1rem;
-    border-radius: 2rem;
+    padding: 0.8rem;
+    border-radius: 1.6rem;
     background-color: var(--contrast-color);
     font-size: 18px;
     font-weight: 500;
