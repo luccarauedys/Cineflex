@@ -43,5 +43,9 @@ export const Main = styled.main`
     font-weight: 500;
     color: var(--black);
     margin-bottom: 60px;
+    cursor: pointer;
+    &:hover {
+      filter: brightness(80%);
+    }
   }
 `;

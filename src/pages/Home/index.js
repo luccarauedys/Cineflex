@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import Loading from '../Loading';
+
 import { Main, Movies, Movie } from './styles';
-import loading from '../../assets/img/loading.gif';
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -19,9 +20,7 @@ export default function Home() {
       <Main>
         <h2>Selecione o filme</h2>
         <Movies>
-          {movies.length === 0 && (
-            <img src={loading} style={{ width: '100px' }} alt="Loading GIF" />
-          )}
+          {movies.length === 0 && <Loading />}
 
           {movies.map((movie) => {
             return (

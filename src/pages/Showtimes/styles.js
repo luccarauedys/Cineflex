@@ -48,6 +48,14 @@ export const Showtime = styled.li`
       font-weight: 500;
       color: var(--black);
       background-color: var(--contrast-color);
+      cursor: pointer;
+      &:hover {
+        filter: brightness(80%);
+      }
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
     }
   }
 `;

@@ -29,5 +29,9 @@ export const Movie = styled.li`
     max-width: 300px;
     border-radius: 0.8rem;
     box-shadow: 2px 2px 10px #00000050;
+    transition: all ease 0.5s;
+  }
+  img:hover {
+    transform: scale(110%);
   }
 `;

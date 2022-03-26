@@ -2,6 +2,8 @@ import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import Loading from '../Loading';
+
 import { Main } from './styles';
 
 export default function Details() {
@@ -11,12 +13,13 @@ export default function Details() {
   useEffect(() => {
     const URL = `https://mock-api.driven.com.br/api/v5/cineflex/movies/${movieID}/showtimes`;
     axios.get(URL).then((response) => {
-      console.log(response.data);
       setMovie(response.data);
     });
   }, [movieID]);
 
-  return (
+  return movie.length === 0 ? (
+    <Loading />
+  ) : (
     <>
       <Main>
         <img src={movie.posterURL} alt={movie.title} />

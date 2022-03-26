@@ -1,38 +1,58 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import Loading from '../Loading';
+
 import { Main, Container, Showtime, Footer } from './styles';
 
-export default function Showtimes() {
-  const { movieID } = useParams();
+export default function Showtimes({ selected, setSelected }) {
   const [movie, setMovie] = useState([]);
   const [days, setDays] = useState([]);
 
+  const { movieID } = useParams();
+  const URL = `https://mock-api.driven.com.br/api/v5/cineflex/movies/${movieID}/showtimes`;
+
   useEffect(() => {
-    const URL = `https://mock-api.driven.com.br/api/v5/cineflex/movies/${movieID}/showtimes`;
     axios.get(URL).then((response) => {
-      console.log(response.data);
       setMovie(response.data);
       setDays(response.data.days);
     });
-  }, [movieID]);
+  }, [URL]);
 
-  return (
+  return days.length === 0 ? (
+    <Loading />
+  ) : (
     <>
       <Main>
         <h2>Selecione o horário</h2>
 
         <Container>
-          {days.map((day) => {
+          {days.map(({ id, weekday, date, showtimes }) => {
             return (
-              <Showtime key={day.id}>
+              <Showtime key={id}>
                 <p>
-                  {day.weekday} - {day.date}
+                  {weekday} - {date}
                 </p>
                 <div>
-                  {day.showtimes.map((time) => {
-                    return <button key={time.id}>{time.name}</button>;
+                  {showtimes.map((showtime) => {
+                    const { name: hour } = showtime;
+                    return (
+                      <button
+                        onClick={() => {
+                          setSelected({
+                            ...selected,
+                            movie,
+                            weekday,
+                            date,
+                            hour,
+                          });
+                        }}
+                        key={showtime.id}
+                      >
+                        <Link to={`/seats/${showtime.id}`}>{hour}</Link>
+                      </button>
+                    );
                   })}
                 </div>
               </Showtime>
