@@ -31,3 +31,7 @@ body {
 body {
   background-color: var(--bg-color);
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}

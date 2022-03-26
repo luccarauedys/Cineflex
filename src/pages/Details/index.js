@@ -26,7 +26,7 @@ export default function Details() {
         <h1>{movie.title}</h1>
         <p>{movie.overview}</p>
         <Link to={`/showtimes/${movie.id}`}>
-          <button>See showtimes</button>
+          <button>Ver horários</button>
         </Link>
       </Main>
     </>

@@ -10,6 +10,11 @@ import { Header } from './styles';
 
 export default function App() {
   const [selected, setSelected] = useState([]);
+  const [buyerInfos, setBuyerInfos] = useState('');
+
+  function getBuyerInfos(name, cpf) {
+    setBuyerInfos({ name, cpf });
+  }
 
   return (
     <BrowserRouter>
@@ -25,8 +30,15 @@ export default function App() {
         />
         <Route
           path="/seats/:sessionID"
-          element={<Seats selected={selected} setSelected={setSelected} />}
+          element={
+            <Seats
+              selected={selected}
+              setSelected={setSelected}
+              getBuyerInfos={getBuyerInfos}
+            />
+          }
         />
+        <Route path="/success" element={<Success buyerInfos={buyerInfos} />} />
       </Routes>
     </BrowserRouter>
   );
