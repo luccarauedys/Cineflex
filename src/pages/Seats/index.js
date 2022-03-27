@@ -18,43 +18,48 @@ import {
 export default function Seats({ infos, getInfos }) {
   const { movie, weekday, hour } = infos;
 
-  const [seats, setSeats] = useState([]);
+  const navigate = useNavigate();
+
   const { sessionID } = useParams();
   const URL = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessionID}/seats`;
+  const [seats, setSeats] = useState([]);
 
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [name, setName] = useState('');
   const [cpf, setCPF] = useState('');
-  const navigate = useNavigate();
+  const [seatsName, setSeatsName] = useState([]);
 
   useEffect(() => {
     axios.get(URL).then((response) => setSeats(response.data.seats));
   }, [URL]);
 
-  function selectSeat(id) {
+  function selectSeat({ id, name }) {
     if (selectedSeats.includes(id)) {
       setSelectedSeats(selectedSeats.filter((seatID) => seatID !== id));
+      setSeatsName(seatsName.filter((seatName) => seatName !== name));
     } else {
       setSelectedSeats([...selectedSeats, id]);
+      setSeatsName([...seatsName, name]);
     }
   }
 
   function sendInfos() {
     const reservation = {
-      ids: [...selectedSeats],
+      seats: [...seatsName],
       name: name.toString(),
       cpf: cpf.toString(),
     };
 
-    getInfos({reservation});
+    getInfos({ reservation });
 
     axios
-      .post(
-        'https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many',
-        reservation
-      )
-      .then(() => navigate('./success'))
-      .catch(() => alert('Desculpe, ocorreu um erro. Tente novamente!'));
+      .post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', {
+        ids: [...selectedSeats],
+        name: name.toString(),
+        cpf: cpf.toString(),
+      })
+      .then(() => navigate('/success'))
+      .catch((response) => console.log(response.error));
   }
 
   return seats.length === 0 ? (
@@ -68,7 +73,7 @@ export default function Seats({ infos, getInfos }) {
           return seat.isAvailable ? (
             <Seat
               onClick={() => {
-                selectSeat(seat.id);
+                selectSeat(seat);
               }}
               background={
                 selectedSeats.includes(seat.id) ? '#f7cd51' : '#e3e3e3'
