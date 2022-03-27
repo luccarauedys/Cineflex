@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
-export const Header = styled.header`
+export default function Header() {
+  return (
+    <Container>
+      <h1>CINEFLEX</h1>
+    </Container>
+  );
+}
+
+export const Container = styled.header`
   position: fixed;
   top: 0;
   left: 0;

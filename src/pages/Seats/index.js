@@ -2,8 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Loading from '../Loading';
-
 import {
   FlexColumn,
   Grid,
@@ -15,15 +13,14 @@ import {
   Footer,
 } from './styles';
 
+import Loading from '../../components/Loading';
+
 export default function Seats({ infos, getInfos }) {
   const { movie, weekday, hour } = infos;
-
   const navigate = useNavigate();
-
   const { sessionID } = useParams();
   const URL = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessionID}/seats`;
   const [seats, setSeats] = useState([]);
-
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [name, setName] = useState('');
   const [cpf, setCPF] = useState('');

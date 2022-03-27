@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Loading from '../Loading';
-
 import { Main, Movies, Movie } from './styles';
+
+import Loading from '../../components/Loading';
 
 export default function Home() {
   const [movies, setMovies] = useState([]);

@@ -2,9 +2,9 @@ import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Loading from '../Loading';
-
 import { Main } from './styles';
+
+import Loading from '../../components/Loading';
 
 export default function Details() {
   const [movie, setMovie] = useState([]);

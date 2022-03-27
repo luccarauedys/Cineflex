@@ -2,9 +2,9 @@ import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Loading from '../Loading';
-
 import { Main, Container, Showtime, Footer } from './styles';
+
+import Loading from '../../components/Loading';
 
 export default function Showtimes({ getInfos }) {
   const [movie, setMovie] = useState([]);
@@ -40,7 +40,7 @@ export default function Showtimes({ getInfos }) {
                     return (
                       <button
                         onClick={() => {
-                          const chosenSession = {movie, weekday, date, hour};
+                          const chosenSession = { movie, weekday, date, hour };
                           getInfos(chosenSession);
                         }}
                         key={showtime.id}
