@@ -21,7 +21,6 @@ export default function Home() {
         <h2>Selecione o filme</h2>
         <Movies>
           {movies.length === 0 && <Loading />}
-
           {movies.map((movie) => {
             return (
               <Movie key={movie.id}>

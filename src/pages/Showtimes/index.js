@@ -6,7 +6,7 @@ import Loading from '../Loading';
 
 import { Main, Container, Showtime, Footer } from './styles';
 
-export default function Showtimes({ selected, setSelected }) {
+export default function Showtimes({ getInfos }) {
   const [movie, setMovie] = useState([]);
   const [days, setDays] = useState([]);
 
@@ -40,13 +40,8 @@ export default function Showtimes({ selected, setSelected }) {
                     return (
                       <button
                         onClick={() => {
-                          setSelected({
-                            ...selected,
-                            movie,
-                            weekday,
-                            date,
-                            hour,
-                          });
+                          const chosenSession = {movie, weekday, date, hour};
+                          getInfos(chosenSession);
                         }}
                         key={showtime.id}
                       >

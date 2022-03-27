@@ -1,4 +1,4 @@
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -15,17 +15,16 @@ import {
   Footer,
 } from './styles';
 
-export default function Seats({ selected, getBuyerInfos }) {
-  const { movie, weekday, hour } = selected;
+export default function Seats({ infos, getInfos }) {
+  const { movie, weekday, hour } = infos;
 
+  const [seats, setSeats] = useState([]);
   const { sessionID } = useParams();
   const URL = `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessionID}/seats`;
 
-  const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [name, setName] = useState('');
   const [cpf, setCPF] = useState('');
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,18 +40,18 @@ export default function Seats({ selected, getBuyerInfos }) {
   }
 
   function sendInfos() {
-    const infos = {
+    const reservation = {
       ids: [...selectedSeats],
       name: name.toString(),
       cpf: cpf.toString(),
     };
 
-    getInfos(infos);
+    getInfos({reservation});
 
     axios
       .post(
         'https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many',
-        infos
+        reservation
       )
       .then(() => navigate('./success'))
       .catch(() => alert('Desculpe, ocorreu um erro. Tente novamente!'));
@@ -70,7 +69,6 @@ export default function Seats({ selected, getBuyerInfos }) {
             <Seat
               onClick={() => {
                 selectSeat(seat.id);
-                console.log(selectedSeats);
               }}
               background={
                 selectedSeats.includes(seat.id) ? '#f7cd51' : '#e3e3e3'
