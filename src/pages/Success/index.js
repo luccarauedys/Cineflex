@@ -25,8 +25,8 @@ export default function Success({ infos }) {
         </Info>
         <Info>
           <h2>Comprador</h2>
-          <p>{reservation.name}</p>
-          <p>{reservation.cpf}</p>
+          <p>Nome: {reservation.name}</p>
+          <p>CPF: {reservation.cpf}</p>
         </Info>
       </Container>
       <Button onClick={() => navigate('/')}>Voltar para Home</Button>
