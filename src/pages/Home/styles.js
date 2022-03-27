@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import '../../assets/variables.css';
 
 export const Main = styled.main`
   padding-top: 70px;
@@ -9,7 +8,7 @@ export const Main = styled.main`
   h2 {
     font-size: 25px;
     font-weight: 500;
-    color: var(--default-text-color);
+    color: #e3e3e3;
     padding: 35px;
     text-align: center;
   }

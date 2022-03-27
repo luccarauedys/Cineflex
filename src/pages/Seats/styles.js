@@ -113,7 +113,7 @@ export const Button = styled.button`
   font-weight: 500;
   padding: 0.8rem;
   border-radius: 1.6rem;
-  background-color: var(--contrast-color);
+  background-color: #e2b60b;
   cursor: pointer;
 `;
 
@@ -124,7 +124,7 @@ export const Footer = styled.footer`
   width: 100%;
   height: 120px;
   padding: 20px 40px;
-  background-color: var(--bg-color-alt);
+  background-color: #000000e6;
   box-shadow: -2px 2px 5px #00000030;
   display: flex;
   align-items: center;

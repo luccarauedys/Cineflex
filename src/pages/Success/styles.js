@@ -16,7 +16,7 @@ export const Main = styled.main`
     font-weight: 700;
     text-align: center;
     line-height: 1.2;
-    color: var(--contrast-color);
+    color: #e2b60b;
   }
 `;
 
@@ -53,6 +53,9 @@ export const Button = styled.button`
   font-weight: 500;
   padding: 0.8rem;
   border-radius: 1.6rem;
-  background-color: var(--contrast-color);
+  background-color: #e2b60b;
   cursor: pointer;
+  &:hover {
+    filter: brightness(80%);
+  }
 `;

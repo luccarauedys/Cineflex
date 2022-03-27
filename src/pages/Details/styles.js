@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import '../../assets/variables.css';
 
 export const Main = styled.main`
   padding-top: 120px;
@@ -23,7 +22,7 @@ export const Main = styled.main`
     width: 80%;
     font-size: 30px;
     font-weight: 500;
-    color: var(--contrast-color);
+    color: #e2b60b;
   }
 
   p {
@@ -31,17 +30,17 @@ export const Main = styled.main`
     width: 90%;
     font-size: 18px;
     font-weight: normal;
-    color: var(--default-text-color);
+    color: #e3e3e3;
   }
 
   button {
     width: 200px;
     padding: 0.8rem;
     border-radius: 1.6rem;
-    background-color: var(--contrast-color);
+    background-color: #e2b60b;
     font-size: 18px;
     font-weight: 500;
-    color: var(--black);
+    color: #000000;
     margin-bottom: 60px;
     cursor: pointer;
     &:hover {
