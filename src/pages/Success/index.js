@@ -26,7 +26,13 @@ export default function Success({ infos }) {
         <Info>
           <h2>Comprador</h2>
           <p>Nome: {reservation.name}</p>
-          <p>CPF: {reservation.cpf}</p>
+          <p>
+            CPF:{' '}
+            {reservation.cpf.replace(
+              /(\d{3})(\d{3})(\d{3})(\d{2})/,
+              '$1.$2.$3-$4'
+            )}
+          </p>
         </Info>
       </Container>
       <Button onClick={() => navigate('/')}>Voltar para Home</Button>
