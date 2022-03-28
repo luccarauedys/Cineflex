@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
+import GoBackBtn from '../GoBackBtn';
+
 export default function Header() {
   return (
     <Container>
+      <GoBackBtn />
       <h1>CINEFLEX</h1>
     </Container>
   );
