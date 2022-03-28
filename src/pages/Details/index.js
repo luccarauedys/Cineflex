@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import { Main } from './styles';
 
+import Header from '../../components/Header';
+import GoBackBtn from '../../components/GoBackBtn';
 import Loading from '../../components/Loading';
 
 export default function Details() {
@@ -21,6 +23,10 @@ export default function Details() {
     <Loading />
   ) : (
     <>
+      <Header>
+        <GoBackBtn />
+      </Header>
+
       <Main>
         <img src={movie.posterURL} alt={movie.title} />
         <h1>{movie.title}</h1>

@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import { Main, Container, Showtime, Footer } from './styles';
 
+import Header from '../../components/Header';
+import GoBackBtn from '../../components/GoBackBtn';
 import Loading from '../../components/Loading';
 
 export default function Showtimes({ getInfos }) {
@@ -21,9 +23,17 @@ export default function Showtimes({ getInfos }) {
   }, [URL]);
 
   return days.length === 0 ? (
-    <Loading />
+    <>
+      <Header>
+        <GoBackBtn />
+      </Header>
+      <Loading />
+    </>
   ) : (
     <>
+      <Header>
+        <GoBackBtn />
+      </Header>
       <Main>
         <h2>Selecione o horário</h2>
 

@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { Main, Movies, Movie } from './styles';
 
+import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
 
   return (
     <>
+      <Header />
       <Main>
         <h2>Selecione o filme</h2>
         <Movies>
