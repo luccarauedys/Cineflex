@@ -16,6 +16,7 @@ const Button = styled.button`
   display: grid;
   place-items: center;
   background-color: transparent;
+  cursor: pointer;
 
   ion-icon {
     font-size: 40px;

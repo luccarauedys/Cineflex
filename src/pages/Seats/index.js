@@ -25,6 +25,7 @@ export default function Seats({ infos, getInfos }) {
   const [name, setName] = useState('');
   const [cpf, setCPF] = useState('');
   const [seatsName, setSeatsName] = useState([]);
+  const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     axios.get(URL).then((response) => setSeats(response.data.seats));
@@ -40,23 +41,36 @@ export default function Seats({ infos, getInfos }) {
     }
   }
 
-  function sendInfos() {
-    const reservation = {
-      seats: [...seatsName],
-      name: name.toString(),
-      cpf: cpf.toString(),
-    };
+  function validateCPF(cpf) {
+    cpf.length === 11 ? setIsValid(true) : setIsValid(false);
+  }
 
-    getInfos({ reservation });
-
-    axios
-      .post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', {
-        ids: [...selectedSeats],
+  function sendInfos(isValid) {
+    if (!isValid || selectedSeats.length === 0) {
+      alert(
+        'Por favor, confira se você digitou corretamente o CPF ou selecionou o(s) assento(s)!'
+      );
+    } else {
+      const reservation = {
+        seats: [...seatsName],
         name: name.toString(),
         cpf: cpf.toString(),
-      })
-      .then(() => navigate('/success'))
-      .catch((response) => console.log(response.error));
+      };
+
+      getInfos({ reservation });
+
+      axios
+        .post(
+          'https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many',
+          {
+            ids: [...selectedSeats],
+            name: name.toString(),
+            cpf: cpf.toString(),
+          }
+        )
+        .then(() => navigate('/success'))
+        .catch((response) => console.log(response.error));
+    }
   }
 
   return seats.length === 0 ? (
@@ -122,12 +136,17 @@ export default function Seats({ infos, getInfos }) {
             type="text"
             placeholder="Digite seu CPF"
             value={cpf}
-            onChange={(e) => setCPF(e.target.value)}
+            onChange={(e) => {
+              setCPF(e.target.value);
+              validateCPF(e.target.value);
+            }}
           />
         </label>
       </InputGroup>
 
-      <Button onClick={sendInfos}>Reservar assento(s)</Button>
+      <Button enable={isValid} onClick={() => sendInfos(isValid)}>
+        Reservar assento(s)
+      </Button>
 
       <Footer>
         <img src={movie.posterURL} alt={movie.title} />

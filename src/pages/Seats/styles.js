@@ -113,7 +113,7 @@ export const Button = styled.button`
   font-weight: 500;
   padding: 0.8rem;
   border-radius: 1.6rem;
-  background-color: #e2b60b;
+  background-color: ${(props) => (props.enable ? '#e2b60b' : '#cecece')};
   cursor: pointer;
 `;
 
